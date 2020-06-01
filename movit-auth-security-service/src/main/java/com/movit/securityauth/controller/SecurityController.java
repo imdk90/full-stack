@@ -34,6 +34,7 @@ public class SecurityController {
 
 	@GetMapping("/hello")
 	public String firstPage() {
+		
 		return "Hello World";
 	}
 

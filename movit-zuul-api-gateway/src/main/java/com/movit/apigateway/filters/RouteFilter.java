@@ -1,4 +1,4 @@
-package com.movit.apigateway;
+package com.movit.apigateway.filters;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;

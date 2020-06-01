@@ -1,4 +1,4 @@
-package com.movit.apigateway;
+package com.movit.apigateway.filters;
 
 import javax.servlet.http.HttpServletRequest;
 
