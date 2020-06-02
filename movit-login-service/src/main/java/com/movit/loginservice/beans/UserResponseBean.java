@@ -7,7 +7,6 @@ public class UserResponseBean {
 	private String lastName;
 	private String password;
 	private int port;
-
 	private String message;
 	
 	

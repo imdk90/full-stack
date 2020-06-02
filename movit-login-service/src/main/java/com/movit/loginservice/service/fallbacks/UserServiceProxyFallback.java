@@ -11,14 +11,13 @@ import com.movit.loginservice.beans.UserResponseBean;
 import com.movit.loginservice.service.UserServiceProxy;
 
 @Component
-public class 
-UserServiceProxyFallback implements UserServiceProxy {
+public class UserServiceProxyFallback implements UserServiceProxy {
 
 	@Autowired
 	private Environment environment;
 
 	@Override
-	public UserResponseBean getUserDetailsById(long id) {
+	public UserResponseBean getUserDetailsById(int id) {
 		return new UserResponseBean(1l, "Default", "default", "123",
 				(Integer.parseInt(environment.getProperty("local.server.port"))));
 
@@ -32,8 +31,14 @@ UserServiceProxyFallback implements UserServiceProxy {
 
 	@Override
 	public List<UserResponseBean> getUsers() {
-		
+
 		return new ArrayList<UserResponseBean>();
+	}
+
+	@Override
+	public UserResponseBean getUserByName(String firstName) {
+		return new UserResponseBean(1l, "Default", "default", "123",
+				(Integer.parseInt(environment.getProperty("local.server.port"))));
 	}
 
 }

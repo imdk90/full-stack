@@ -18,11 +18,14 @@ import com.movit.loginservice.service.fallbacks.UserServiceProxyFallback;
 public interface UserServiceProxy {
 
 	@GetMapping("/user/{id}")
-	public UserResponseBean getUserDetailsById(@PathVariable long id);
+	public UserResponseBean getUserDetailsById(@PathVariable int id);
 
 	@GetMapping("/user/{firstName}/{password}")
 	public UserResponseBean getUserByFirstName(@PathVariable String firstName, @PathVariable String password);
 
 	@GetMapping("/users")
 	public List<UserResponseBean> getUsers();
+	
+	@GetMapping("/getUser/{firstName}")
+	public UserResponseBean getUserByName(@PathVariable String firstName);
 }

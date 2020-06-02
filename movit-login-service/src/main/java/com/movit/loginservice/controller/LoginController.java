@@ -20,24 +20,8 @@ public class LoginController {
 	@Autowired
 	private UserServiceProxy proxy;
 
-	/*
-	 * @Autowired private UserServiceByNameProxy proxyByName;
-	 */
-	/*
-	 * @GetMapping("/user/login/{id}/{password}") public UserResponseBean
-	 * loginUserByUsingRestController(@PathVariable long id, @PathVariable String
-	 * password) {
-	 * 
-	 * Map<String, Long> uriVariable = new HashMap<String, Long>();
-	 * uriVariable.put("id", id); responseEntity = new
-	 * RestTemplate().getForEntity("http://localhost:8000/user/{id}",
-	 * UserResponseBean.class, uriVariable); UserResponseBean userBean =
-	 * responseEntity.getBody(); if (userBean != null) {
-	 * userBean.setMessage("Success"); } return userBean; }
-	 */
-
 	@GetMapping("/user/login-feign/{id}/{password}")
-	public UserResponseBean loginUserByUsingFeign(@PathVariable long id, @PathVariable String password) {
+	public UserResponseBean loginUserByUsingFeign(@PathVariable int id, @PathVariable String password) {
 		UserResponseBean userBean = proxy.getUserDetailsById(id);
 		if (userBean != null) {
 			userBean.setMessage("Success");
@@ -61,8 +45,10 @@ public class LoginController {
 
 	@GetMapping("/user/{userName}")
 	public UserResponseBean getUserDetails(@PathVariable String userName) {
-		UserResponseBean userResponse = proxy.getUsers().stream()
-				.filter(user -> user.getFirstName().equalsIgnoreCase(userName)).findAny().orElse(null);
+		UserResponseBean userResponse = proxy.getUserByName(userName);
+		if (userResponse != null) {
+			userResponse.setMessage("Success");
+		}
 		return userResponse;
 	}
 }
