@@ -1,18 +1,31 @@
 package com.movit.serviceservice.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "user")
 public class User {
 
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String password;
+	@Transient
 	private int port;
 
 	protected User() {
 
 	}
 
-	public User(long id, String firstName, String lastName, String password) {
+	public User(int id, String firstName, String lastName, String password) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -20,11 +33,11 @@ public class User {
 		this.password = password;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

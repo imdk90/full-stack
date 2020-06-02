@@ -21,7 +21,7 @@ public class UserServiceController {
 	private Environment environment;
 
 	@GetMapping("/user/{id}")
-	public User getUserDetailsById(@PathVariable long id) {
+	public User getUserDetailsById(@PathVariable int id) {
 		User findById = userService.findById(id);
 		findById.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 		return findById;
@@ -33,10 +33,18 @@ public class UserServiceController {
 		return users;
 	}
 
+	@GetMapping("/getUser/{firstName}")
+	public User getUserByName(@PathVariable String firstName) {
+		User userByName = userService.findByFirstName(firstName);
+		userByName.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+		return userByName;
+	}
+
 	@GetMapping("/user/{firstName}/{password}")
 	public User getUserByFirstName(@PathVariable String firstName, @PathVariable String password) {
 		User userByName = userService.findByFirstName(firstName);
 		userByName.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 		return userByName;
 	}
+
 }
